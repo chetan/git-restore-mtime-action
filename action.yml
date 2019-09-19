@@ -1,5 +1,7 @@
 name: 'git-restore-mtime'
 description: 'Restore the modified timestamp based on git commits'
+icon: 'clock'
+color: 'orange'
 author: 'Pixelcop Research, Inc.'
 runs:
   using: 'node12'
