@@ -4,7 +4,7 @@ import path from 'path';
 
 async function run() {
   const script = path.normalize(path.join(__dirname, '..', 'src', 'git-restore-mtime-bare'));
-  core.info("running script " + script);
+  // core.info("running script " + script);
   await exec.exec('python', [script]);
 }
 
