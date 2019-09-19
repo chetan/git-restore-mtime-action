@@ -1,0 +1,6 @@
+name: 'git-restore-mtime'
+description: 'Restore the modified timestamp based on git commits'
+author: 'Pixelcop Research, Inc.'
+runs:
+  using: 'node12'
+  main: 'lib/main.js'
