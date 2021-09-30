@@ -15,6 +15,7 @@ jobs:
       matrix:
         python-version: [ '2.x' ]
     name: 'Ubuntu Latest w/ Python ${{ matrix.python-version }}'
+
     steps:
     - name: Setup python
       uses: actions/setup-python@v2
@@ -27,6 +28,10 @@ jobs:
       with:
         ref: '${{ github.event.inputs.branch }}'
 
+    - name: debug ls
+      run: |
+        ls -al
+
     # Fix timestamps
     - name: restore timestamps
       uses: chetan/git-restore-mtime-action@release
@@ -34,6 +39,7 @@ jobs:
     # Check timestamps
     - name: validate
       run: |
+        ls -al
         e=1568919521
         t=$(stat --format="%Y" jest.config.js)
         if [[ $t -ne $e ]]; then
