@@ -40,7 +40,7 @@ jobs:
     - name: validate
       run: |
         ls -al
-        e=1568919521
+        e=1568920506
         t=$(stat --format="%Y" jest.config.js)
         if [[ $t -ne $e ]]; then
           echo "timestamp for jest.config.js was '$t'; expected 1568919521"

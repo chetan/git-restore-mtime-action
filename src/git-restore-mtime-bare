@@ -66,7 +66,7 @@ for line in gitobj.stdout:
         file = os.path.normpath(line.split('\t')[-1])
         if file in filelist:
             filelist.remove(file)
-            #print mtime, file
+            print mtime, file
             lutime(file, (mtime, mtime))
 
     # Date line
