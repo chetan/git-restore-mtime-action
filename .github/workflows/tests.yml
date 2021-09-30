@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ '2.x' ]
+        python-version: [ '2.x', '3.x' ]
     name: 'Ubuntu Latest w/ Python ${{ matrix.python-version }}'
 
     steps:
     - name: Setup python
       uses: actions/setup-python@v2
       with:
-        python-version: "2.x"
+        python-version: '${{ matrix.python-version }}'
 
     # Checkout the requested branch
     - name: checkout
