@@ -58,7 +58,7 @@ jobs:
 
     # Fix timestamps
     - name: restore timestamps
-      uses: chetan/git-restore-mtime-action@release
+      uses: chetan/git-restore-mtime-action@v1
 
     # Upload to S3
     - name: sync s3
