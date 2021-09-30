@@ -29,16 +29,6 @@ jobs:
         ref: '${{ github.event.inputs.branch }}'
         fetch-depth: 0
 
-    - name: debug ls
-      run: |
-        python --version
-        git --version
-        ls -al
-
-    - name: changes
-      run: |
-        git whatchanged --pretty=%at
-
     # Fix timestamps
     - name: restore timestamps
       uses: ./
@@ -46,7 +36,6 @@ jobs:
     # Check timestamps
     - name: validate
       run: |
-        ls -al
         e=1568920506
         t=$(stat --format="%Y" jest.config.js)
         if [[ $t -ne $e ]]; then
