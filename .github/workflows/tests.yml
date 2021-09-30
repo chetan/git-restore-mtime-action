@@ -1,0 +1,30 @@
+name: 'Test Suite'
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to run tests on'
+        required: true
+        default: 'master'
+
+jobs:
+  test-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@${{ github.event.inputs.branch }}
+
+    # Fix timestamps
+    - name: restore timestamps
+      uses: chetan/git-restore-mtime-action@release
+
+    # Check timestamps
+    - name: validate
+      run: |
+        e=1568919521
+        t=$(stat --format="%Y" jest.config.js)
+        if [[ $t -ne $e ]]; then
+          echo "timestamp for jest.config.js was '$t'; expected 1568919521"
+          exit 1
+        fi
