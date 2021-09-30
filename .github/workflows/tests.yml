@@ -11,12 +11,21 @@ on:
 jobs:
   test-ubuntu:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ '2.x' ]
+    name: 'Ubuntu Latest w/ Python ${{ matrix.python-version }}'
     steps:
+    - name: Setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "2.x"
+
+    # Checkout the requested branch
     - name: checkout
       uses: actions/checkout@v2
       with:
         ref: '${{ github.event.inputs.branch }}'
-
 
     # Fix timestamps
     - name: restore timestamps
