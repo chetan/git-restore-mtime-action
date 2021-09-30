@@ -4,7 +4,14 @@ A GitHub Workflow Action which restores timestamps of files in the current tree 
 
 ## Usage
 
-The sample workflow below illustrates a static site build and deploy using the [S3 Sync Action](https://link). The `aws s3 sync` command relies on having the correct timestamps for the files to be uploaded, thus, we must reset them before running that action.
+The sample workflow below illustrates a static site build and deploy using the
+[S3 Sync Action](https://link). The `aws s3 sync` command relies on having the
+correct timestamps for the files to be uploaded, thus, we must reset them before
+running that action.
+
+__NOTE__: git-restore-mtime-bare uses the ref log to find the correct timestamp
+for each file. This requires a full git history.  See `line 57` in the example
+below.
 
 ```yaml
 name: Build and Deploy
@@ -44,6 +51,10 @@ jobs:
       uses: actions/checkout@master
       with:
         ref: dist
+        # git-restore-mtime-bare uses the ref log to find the correct timestamp
+        # for each file. This requires a full git history. The default value (1)
+        # creates a shallow checkout.
+        fetch-depth: 0
 
     # Fix timestamps
     - name: restore timestamps
