@@ -43,7 +43,13 @@ const path_1 = __importDefault(__nccwpck_require__(622));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         const script = path_1.default.normalize(path_1.default.join(__dirname, '..', 'src', 'git-restore-mtime-bare'));
-        yield exec.exec('python', [script]);
+        try {
+            yield exec.exec('python', [script]);
+        }
+        catch (e) {
+            console.error('git-restore-mtime-bare failed: ', e);
+            process.exit(1);
+        }
     });
 }
 run();
