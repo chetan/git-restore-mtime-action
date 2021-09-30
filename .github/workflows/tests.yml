@@ -30,6 +30,8 @@ jobs:
 
     - name: debug ls
       run: |
+        python --version
+        git --version
         ls -al
 
     # Fix timestamps
