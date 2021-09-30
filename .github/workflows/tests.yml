@@ -34,7 +34,7 @@ jobs:
 
     # Fix timestamps
     - name: restore timestamps
-      uses: chetan/git-restore-mtime-action@master
+      uses: ./
 
     # Check timestamps
     - name: validate
