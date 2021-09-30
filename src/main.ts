@@ -6,7 +6,7 @@ async function run() {
   try {
     await exec.exec('python', [script]);
   } catch (e) {
-    console.error('git-restore-mtime-bare failed: ', e);
+    console.error('git-restore-mtime-bare failed:\n', e);
     process.exit(1);
   }
 }
