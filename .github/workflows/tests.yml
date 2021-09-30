@@ -34,6 +34,10 @@ jobs:
         git --version
         ls -al
 
+    - name: changes
+      run: |
+        git whatchanged --pretty=%at
+
     # Fix timestamps
     - name: restore timestamps
       uses: ./
