@@ -13,7 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
-      uses: actions/checkout@${{ github.event.inputs.branch }}
+      uses: actions/checkout@v2
+      with:
+        ref: '${{ github.event.inputs.branch }}'
+
 
     # Fix timestamps
     - name: restore timestamps
