@@ -5,5 +5,5 @@ branding:
   icon: 'clock'
   color: 'orange'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
