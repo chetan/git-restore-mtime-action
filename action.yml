@@ -5,5 +5,8 @@ branding:
   icon: 'clock'
   color: 'orange'
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  using: "composite"
+  steps:
+    - shell: bash
+      run: |
+        $GITHUB_ACTION_PATH/git-restore-mtime
