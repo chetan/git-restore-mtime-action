@@ -9,19 +9,14 @@ on:
         default: 'master'
 
 jobs:
-  test-ubuntu:
-    runs-on: ubuntu-latest
+  tests:
+    name: "Test ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [ '2.x', '3.x' ]
-    name: 'Ubuntu Latest w/ Python ${{ matrix.python-version }}'
+        os: [ubuntu-latest, ubuntu-18.04, windows-latest, macos-latest]
 
     steps:
-    - name: Setup python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '${{ matrix.python-version }}'
-
     # Checkout the requested branch
     - name: checkout
       uses: actions/checkout@v3
