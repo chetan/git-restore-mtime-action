@@ -1,6 +1,6 @@
 # git-restore-mtime action
 
-A GitHub Workflow Action which restores timestamps of files in the current tree based on their last commit times. Uses the [git-restore-mtime-bare](https://github.com/MestreLion/git-tools) script by [@MestreLion](https://github.com/MestreLion).
+A GitHub Workflow Action which restores timestamps of files in the current tree based on their last commit times. Uses the [git-restore-mtime](https://github.com/MestreLion/git-tools) script (v2022.12 release) by [@MestreLion](https://github.com/MestreLion).
 
 ## Usage
 
@@ -9,7 +9,7 @@ The sample workflow below illustrates a static site build and deploy using the
 correct timestamps for the files to be uploaded, thus, we must reset them before
 running that action.
 
-__NOTE__: git-restore-mtime-bare uses the ref log to find the correct timestamp
+__NOTE__: git-restore-mtime uses the ref log to find the correct timestamp
 for each file. This requires a full git history.  See `checkout dist` task in
 the example below.
 
@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v3
 
     # Note: This is *only* for the very next step, it is not required by
     # git-restore-mtime-action.
@@ -50,7 +50,7 @@ jobs:
 
     # Check out the new branch
     - name: checkout dist
-      uses: actions/checkout@master
+      uses: actions/checkout@v3
       with:
         ref: dist
         # git-restore-mtime-bare uses the ref log to find the correct timestamp
@@ -60,7 +60,7 @@ jobs:
 
     # Fix timestamps
     - name: restore timestamps
-      uses: chetan/git-restore-mtime-action@v1
+      uses: chetan/git-restore-mtime-action@v2
 
     # Upload to S3
     - name: sync s3
