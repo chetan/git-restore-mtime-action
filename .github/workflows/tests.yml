@@ -30,6 +30,7 @@ jobs:
 
     # Check timestamps
     - name: validate
+      shell: bash
       run: |
         e=1568920506
         if [[ "$OSTYPE" == *'darwin'* ]]; then
