@@ -32,7 +32,11 @@ jobs:
     - name: validate
       run: |
         e=1568920506
-        t=$(stat --format="%Y" LICENSE)
+        if [[ "$OSTYPE" == *'darwin'* ]]; then
+          t=$(stat -f %m LICENSE)
+        else
+          t=$(stat --format="%Y" LICENSE)
+        fi
         if [[ $t -ne $e ]]; then
           echo "timestamp for LICENSE was '$t'; expected 1568919521"
           exit 1
