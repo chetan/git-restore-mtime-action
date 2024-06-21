@@ -14,4 +14,4 @@ runs:
   steps:
     - shell: bash
       run: |
-        cd "$INPUT_working-directory" && "$GITHUB_ACTION_PATH"/git-restore-mtime
+        cd "${{ inputs.working-directory }}" && "$GITHUB_ACTION_PATH"/git-restore-mtime
