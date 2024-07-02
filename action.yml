@@ -2,7 +2,7 @@ name: 'git-restore-mtime'
 description: "Restore file's modified time (timestamp) based on git commits"
 author: 'Pixelcop Research, Inc.'
 inputs:
-  working-directory,:
+  working-directory:
     description: "Where to run the action"
     required: false
     default: '.'
