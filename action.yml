@@ -1,6 +1,11 @@
 name: 'git-restore-mtime'
 description: "Restore file's modified time (timestamp) based on git commits"
 author: 'Pixelcop Research, Inc.'
+inputs:
+  working-directory:
+    description: "Where to run the action"
+    required: false
+    default: '.'
 branding:
   icon: 'clock'
   color: 'orange'
@@ -9,4 +14,4 @@ runs:
   steps:
     - shell: bash
       run: |
-        $GITHUB_ACTION_PATH/git-restore-mtime
+        cd "${{ inputs.working-directory }}" && "$GITHUB_ACTION_PATH"/git-restore-mtime
