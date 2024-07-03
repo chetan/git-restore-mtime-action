@@ -25,14 +25,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # Note: This is *only* for the very next step, it is not required by
     # git-restore-mtime-action.
     - name: setup node
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
-        node-version: '10.x'
+        node-version: 'latest'
 
     # Run the build script which populates the ./dist folder
     - name: build
@@ -50,7 +50,7 @@ jobs:
 
     # Check out the new branch
     - name: checkout dist
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         ref: dist
         # git-restore-mtime-bare uses the ref log to find the correct timestamp
@@ -73,5 +73,15 @@ jobs:
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+```
 
+### Configuration
+
+```yaml
+- name: restore timestamps
+  uses: chetan/git-restore-mtime-action@v2
+  with:
+    # Directory to change to before running the action. (Optional)
+    # Default: '.'
+    working-directory: '.'
 ```
