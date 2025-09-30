@@ -1,6 +1,6 @@
 # git-restore-mtime action
 
-A GitHub Workflow Action which restores timestamps of files in the current tree based on their last commit times. Uses the [git-restore-mtime](https://github.com/MestreLion/git-tools) script (v2022.12 release) by [@MestreLion](https://github.com/MestreLion).
+A GitHub Workflow Action which restores timestamps of files in the current tree based on their last commit times. Uses the [git-restore-mtime](https://github.com/MestreLion/git-tools) script (v2025.08 release) by [@MestreLion](https://github.com/MestreLion).
 
 ## Usage
 
