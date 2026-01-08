@@ -84,4 +84,42 @@ jobs:
     # Directory to change to before running the action. (Optional)
     # Default: '.'
     working-directory: '.'
+    # Extra arguments to pass to git-restore-mtime script. (Optional)
+    # Default: ''
+    args: --unique-times
 ```
+
+#### Available flags
+
+```
+usage: git-restore-mtime [-h] [--quiet | --verbose] [--cwd DIRECTORY] [--git-dir GITDIR] [--work-tree WORKTREE] [--force] [--merge] [--first-parent] [--skip-missing] [--no-directories] [--test] [--commit-time]
+                         [--oldest-time] [--skip-older-than SECONDS] [--skip-older-than-commit] [--unique-times] [--version]
+                         [PATHSPEC ...]
+
+Change the modification time (mtime) of files in work tree, based on the date of the most recent commit that modified the file, including renames. Ignores untracked files and uncommitted deletions, additions and
+renames, and by default modifications too.
+
+positional arguments:
+  PATHSPEC              Only modify paths matching PATHSPEC, relative to current directory. By default, update all but untracked files and submodules.
+```
+
+| Option | Description |
+|--------|-------------|
+| `-h`, `--help` | show this help message and exit |
+| `--quiet`, `-q` | Suppress informative messages and summary statistics. |
+| `--verbose`, `-v` | Print additional information for each processed file. Specify twice to further increase verbosity. |
+| `--cwd`, `-C DIRECTORY` | Run as if git-restore-mtime was started in directory DIRECTORY. This affects how --work-tree, --git-dir and PATHSPEC arguments are handled. See 'man 1 git' or 'git --help' for more information. |
+| `--git-dir GITDIR` | Path to the git repository, by default auto-discovered by searching the current directory and its parents for a .git/ subdirectory. |
+| `--work-tree WORKTREE` | Path to the work tree root, by default the parent of GITDIR if it's automatically discovered, or the current directory if GITDIR is set. |
+| `--force`, `-f` | Force updating files with uncommitted modifications. Untracked files and uncommitted deletions, renames and additions are always ignored. |
+| `--merge`, `-m` | Include merge commits. Leads to more recent times and more files per commit, thus with the same time, which may or may not be what you want. Including merge commits may lead to fewer commits being evaluated as files are found sooner, which can improve performance, sometimes substantially. But as merge commits are usually huge, processing them may also take longer. By default, merge commits are only used for files missing from regular commits. |
+| `--first-parent` | Consider only the first parent, the "main branch", when evaluating merge commits. Only effective when merge commits are processed, either when --merge is used or when finding missing files after the first regular log search. See --skip-missing. |
+| `--skip-missing`, `-s` | Do not try to find missing files. If merge commits were not evaluated with --merge and some files were not found in regular commits, by default git-restore-mtime searches for these files again in the merge commits. This option disables this retry, so files found only in merge commits will not have their timestamp updated. |
+| `--no-directories`, `-D` | Do not update directory timestamps. By default, use the time of its most recently created, renamed or deleted file. Note that just modifying a file will NOT update its directory time. |
+| `--test`, `-t` | Test run: do not actually update any file timestamp. |
+| `--commit-time`, `-c` | Use commit time instead of author time. |
+| `--oldest-time`, `-o` | Update times based on the oldest, instead of the most recent commit of a file. This reverses the order in which the git log is processed to emulate a file "creation" date. Note this will be inaccurate for files deleted and re-created at later dates. |
+| `--skip-older-than SECONDS` | Ignore files that are currently older than SECONDS. Useful in workflows that assume such files already have a correct timestamp, as it may improve performance by processing fewer files. |
+| `--skip-older-than-commit`, `-N` | Ignore files older than the timestamp it would be updated to. Such files may be considered "original", likely in the author's repository. |
+| `--unique-times` | Set the microseconds to a unique value per commit. Allows telling apart changes that would otherwise have identical timestamps, as git's time accuracy is in seconds. |
+| `--version`, `-V` | show program's version number and exit |
